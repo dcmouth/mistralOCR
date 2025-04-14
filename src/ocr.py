@@ -56,7 +56,6 @@ def save_ocr_results(ocr_response: OCRResponse, original_file: Path, file_type: 
                 with open(img_path, 'wb') as f:
                     f.write(img_data)
                 page_images[img.id] = f"images/{img.id}.png"
-            
             page_markdown = replace_images_in_markdown(page.markdown, page_images)
             all_markdowns.append(page_markdown)
         
@@ -68,8 +67,10 @@ def save_ocr_results(ocr_response: OCRResponse, original_file: Path, file_type: 
         output_file = os.path.join(base_dir, f"{original_name}.md")
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(ocr_response.pages[0].markdown)
-    
+    print(all_markdowns)
+    print(type(all_markdowns))
     return base_dir
+
 
 def process_image(file_path: str, client: Mistral) -> OCRResponse:
     """
